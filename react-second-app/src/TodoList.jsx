@@ -16,13 +16,30 @@ let updateTodoValue =(event)=>{
 }
 
 let upperCaseAll = ()=>{
-    setTodos(todos.map((todo)=>{
+    setTodos((todos)=>(
+        todos.map((todo)=>{
         return{
             ...todo,
             task: todo.task.toUpperCase()
         }
 
-    }))
+    })))
+}
+
+let UpperCaseOne = (id) =>{
+    setTodos((todos)=>(
+        todos.map((todo)=>{
+            if(todo.id === id){
+                return{
+                    ...todo,
+                    task: todo.task.toUpperCase()
+                };
+            }
+            else{
+                return todo;
+            }
+        })
+    ))
 }
     return( 
         <div>
@@ -37,6 +54,7 @@ let upperCaseAll = ()=>{
                     <span>{todo.task}</span>
                     &nbsp;&nbsp;&nbsp;
                     <button onClick={()=>deleteCopy(todo.id)}>Delete</button>
+                    <button onClick={()=>UpperCaseOne(todo.id)}>UpperCase One</button>
                     </li>
         ))}
         </ul>
