@@ -14,6 +14,16 @@ let deleteCopy = (id)=>{
 let updateTodoValue =(event)=>{
     setNewTodo(event.target.value)
 }
+
+let upperCaseAll = ()=>{
+    setTodos(todos.map((todo)=>{
+        return{
+            ...todo,
+            task: todo.task.toUpperCase()
+        }
+
+    }))
+}
     return( 
         <div>
         <input type="text" placeholder="add something" value={newTodo} onChange={updateTodoValue}/>
@@ -30,6 +40,7 @@ let updateTodoValue =(event)=>{
                     </li>
         ))}
         </ul>
+        <button onClick={upperCaseAll}>UpperCase All</button>
         
         </div>
     )
