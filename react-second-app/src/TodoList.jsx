@@ -1,10 +1,10 @@
 import { useState } from "react"
 import {v4 as uuidv4} from "uuid";
 export default function TodoList(){
-let [todos, setTodos]= useState([{task:"sample Task", id: uuidv4()}])
+let [todos, setTodos]= useState([{task:"sample Task", id: uuidv4(), isDone:false}])
 let [newTodo, setNewTodo]=useState("")
 let addNewTask=()=>{
-    setTodos([...todos, {task:newTodo, id:uuidv4()}])
+    setTodos([...todos, {task:newTodo, id:uuidv4(), isDone:false}])
     setNewTodo("");
 }
 let deleteCopy = (id)=>{
@@ -15,24 +15,26 @@ let updateTodoValue =(event)=>{
     setNewTodo(event.target.value)
 }
 
-let upperCaseAll = ()=>{
+let MarkAsDoneAll = ()=>{
     setTodos((todos)=>(
         todos.map((todo)=>{
         return{
             ...todo,
-            task: todo.task.toUpperCase()
+            isDone:true,
+            // task: todo.task.toUpperCase()
         }
 
     })))
 }
 
-let UpperCaseOne = (id) =>{
+let markAsDone = (id) =>{
     setTodos((todos)=>(
         todos.map((todo)=>{
             if(todo.id === id){
                 return{
                     ...todo,
-                    task: todo.task.toUpperCase()
+                    // task: todo.task.toUpperCase()
+                    isDone:true,
                 };
             }
             else{
@@ -51,14 +53,14 @@ let UpperCaseOne = (id) =>{
         <ul>
         {todos.map((todo)=>(
                 <li key={todo.id}>
-                    <span>{todo.task}</span>
+                    <span style={todo.isDone?{textDecorationLine:"line-through"}:{}}>{todo.task}</span>
                     &nbsp;&nbsp;&nbsp;
                     <button onClick={()=>deleteCopy(todo.id)}>Delete</button>
-                    <button onClick={()=>UpperCaseOne(todo.id)}>UpperCase One</button>
+                    <button onClick={()=>markAsDone(todo.id)}>Mark As Done</button>
                     </li>
         ))}
         </ul>
-        <button onClick={upperCaseAll}>UpperCase All</button>
+        <button onClick={MarkAsDoneAll}>Mark As Done All</button>
         
         </div>
     )
