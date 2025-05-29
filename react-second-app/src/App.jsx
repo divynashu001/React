@@ -10,7 +10,6 @@ function App() {
   
   return (
     <>
-      {/* <Lottery n={3} winingSum={15}/> */}
       <Comments/>
       
     </>
